@@ -59,6 +59,8 @@ for(let i=0; i<BTNs.length; i++){
                 BTNs[i+1].checked = true;
                 allSongs[i+1].play();
                 BTN_imgs[i+1].src=`../assets/pause.png`
+                UM_name.innerHTML = alboms[get_i].songs[i+1].title;
+                UM_ath.innerHTML = alboms[get_i].songs[i+1].author;
             }else if(infBTN.checked && !allSongs[i+1]){
                 BTNs[0].checked = true;
                 allSongs[0].play();

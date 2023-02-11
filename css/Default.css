@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed&display=swap');
+body{
+    padding: 0 5%;
+    font-family: 'Fira Sans Condensed', sans-serif;
+}
+/*HEADER*/
+.logo{
+    font-size: 30px;
+    font-weight: bold;
+    color: #FF8C00;
+}
+.nav a{
+    font-size: 18px;
+    color: grey;
+    transition: color 0.5s;
+}
+.nav .selected{
+    text-decoration:underline;
+    color: black;
+}
+.nav a:hover{
+    color:	#FFA500;
+}
+.badge{
+    font-size: 16px;
+    background: linear-gradient(250deg, rgba(255,111,0,1) 0%, rgba(196,0,255,1) 33%, rgba(76,0,255,1) 66%, rgba(0,219,255,1) 100%);
+    outline: 0 solid rgba(76,0,255,1);
+}
+.dropdown-menu, .badge, .avater{
+    transition: 0.5s;
+}
+.avater{
+    outline: 0 solid #FF8C00;
+    border-radius: 100%;
+}
+
+.badge:hover{
+    outline-width: 2px;
+    outline-offset: 1px;
+}
+.avater:hover{
+    outline-width: 2px;
+    outline-offset: 2.5px;
+}
+/*MAIN*/
+main{
+    padding: 20px;
+    min-height: calc(100vh - 78px - 81px);
+}
+.like{
+    width: 25px;
+    transition: background 0.5s;
+}
+/*FOOTER*/
+footer{
+    text-align: center;
+}
+.a{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+}
+.a a{
+    color: black;
+    text-decoration: none;
+}
+/*OTHER*/

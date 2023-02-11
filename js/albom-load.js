@@ -172,7 +172,7 @@ for(let i=0;i<alboms[get_i].songs.length; i++){
     <li class="list-group-item song">
         <label class="d-flex align-items-center">
         <audio class="audio d-none" src="../assets/MUSIK/${page_name}_${i+1}.mp3"></audio>
-        <input class="d-none song-btn" type="checkbox"><img src="../assets/play.png" class="me-3 song-btn-img" height="30px">
+        <input class="d-none song-btn" type="checkbox"><img src="../assets/play.png" class="me-3 song-btn-img" height="32px">
         <div>
             <div>${song.title}</div>
             <div class="text-secondary">${song.author}</div>

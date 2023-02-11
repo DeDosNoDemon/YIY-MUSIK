@@ -12,6 +12,11 @@ let inf = document.querySelector(`.inf`);
 let infBTN = document.querySelector(`.inf-inp`);
 let cross = document.querySelector(`.cross`);
 let crossBTN = document.querySelector(`.cross-inp`);
+let PR_bar = document.querySelector(`.progress_bar`);
+let PR_time = document.querySelector(`.time`);
+let prBTN = document.querySelector(`.pause-inp`);
+let prIMG = document.querySelector(`.pause-img`);
+let T = 0;
 
 function audioCheck(a){
     for(let i=0;i<allSongs.length;i++){
@@ -30,45 +35,88 @@ function menuChangeDown(i){
     UM_ath.innerHTML = `Автор(ы)`;
     under_menu.classList.add(`hiden`);
 }
+function setTime(){
+    if(PR_bar.value != getNum()) PR_bar.value = getNum();
+    let timeD = ``;
+    if(Math.round(allSongs[T].duration/60)<10){
+        timeD+=`0`;
+    } timeD+= Math.round(allSongs[T].duration/60)+`:`;
+    if(Math.round(allSongs[T].duration%60)<10){
+        timeD+=`0`;
+    }timeD+= Math.round(allSongs[T].duration%60);
+
+    let timeN = ``;
+    if(Math.round(getNum()/60)<10){
+        timeN+=`0`;
+    } timeN+= Math.round(getNum()/60)+`:`;
+    if(Math.round(getNum()%60)<10){
+        timeN+=`0`;
+    }timeN+= Math.round(getNum()%60);
+    PR_time.innerHTML = timeN+`/`+timeD
+    window.requestAnimationFrame(setTime);
+}
+function getNum(){
+    return Math.round(allSongs[T].currentTime);
+}
+function playMusic(i){
+    audioCheck(i);
+    allSongs[i].currentTime = 0;
+    BTNs[i].checked = true;
+    BTN_imgs[i].src = `../assets/pause.png`;
+    allSongs[i].play();
+    menuChangeUp(i);
+    prIMG.src=`../assets/pause.png`
+    prBTN.checked = true;
+    PR_bar.value = 0;
+    PR_bar.max = allSongs[i].duration;
+    T = i;
+    setTime();
+}
+function stopMusic(i){
+    BTN_imgs[i].src = `../assets/play.png`;
+    allSongs[i].pause(); allSongs[i].currentTime = 0;
+    BTNs[i].checked = false;
+    menuChangeDown(i);    
+}
+function resumeMusic(i){
+    prIMG.src=`../assets/pause.png`;
+    allSongs[i].play();
+}
+function pauseMusik(i){
+    prIMG.src=`../assets/play.png`;
+    allSongs[i].pause();
+}
 
 for(let i=0; i<BTNs.length; i++){
     allSongs[i].volume = 0.5;
     BTNs[i].addEventListener(`change`, function(e){
         let song = allSongs[i];
         if(e.target.checked) {
-            audioCheck(i);
-            BTN_imgs[i].src = `../assets/pause.png`;
-            song.play();
-            menuChangeUp(i);
+            playMusic(i);
         }
         else {
-            BTN_imgs[i].src = `../assets/play.png`;
-            song.pause(); song.currentTime = 0;
-            menuChangeDown(i);
+            stopMusic(i);
         };
     });
     allSongs[i].addEventListener(`ended`, function(e){
         if(loopBTN.checked){
-            allSongs[i].currentTime = 0;
-            allSongs[i].play();
+            stopMusic(i);
         }else{
             BTN_imgs[i].src=`../assets/play.png`
-            BTNs[i].checked = false;
             allSongs[i].currentTime = 0;
             if(allSongs[i+1]){
-                BTNs[i+1].checked = true;
-                allSongs[i+1].play();
-                BTN_imgs[i+1].src=`../assets/pause.png`
-                UM_name.innerHTML = alboms[get_i].songs[i+1].title;
-                UM_ath.innerHTML = alboms[get_i].songs[i+1].author;
+                playMusic(i+1);
             }else if(infBTN.checked && !allSongs[i+1]){
-                BTNs[0].checked = true;
-                allSongs[0].play();
-                BTN_imgs[0].src=`../assets/pause.png`
+                playMusic(0);
             }
         }
     });
 }
+prBTN.addEventListener(`click`,function(){
+    if (prBTN.checked) pauseMusik(T);
+    else resumeMusic(T);
+    prBTN.checked = !prBTN.checked;
+});
 volume.addEventListener(`input`, function(e){
     volume_txt.innerHTML=e.target.value+`%`
     for(let i=0;i<allSongs.length;i++){

@@ -109,7 +109,7 @@ for(let i=0; i<BTNs.length; i++){
             }else if(infBTN.checked && !allSongs[i+1]){
                 playMusic(0);
             }else{
-                stopMusik(i)
+                stopMusic(i)
             }
         }
     });

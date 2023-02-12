@@ -49,14 +49,14 @@ function setTime(){
     if(Math.floor(getNum()/60)<10){
         timeN+=`0`;
     } timeN+= Math.floor(getNum()/60)+`:`;
-    if(Math.round(getNum()%60)<10){
+    if(Math.floor(getNum()%60)<10){
         timeN+=`0`;
-    }timeN+= Math.round(getNum()%60);
+    }timeN+= Math.floor(getNum()%60);
     PR_time.innerHTML = timeN+`/`+timeD
     window.requestAnimationFrame(setTime);
 }
 function getNum(){
-    return Math.round(allSongs[T].currentTime);
+    return Math.floor(allSongs[T].currentTime);
 }
 function playMusic(i){
     audioCheck(i);

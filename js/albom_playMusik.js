@@ -38,12 +38,12 @@ function menuChangeDown(i){
 function setTime(){
     if(PR_bar.value != getNum()) PR_bar.value = getNum();
     let timeD = ``;
-    if(Math.round(allSongs[T].duration/60)<10){
+    if(Math.floor(allSongs[T].duration/60)<10){
         timeD+=`0`;
-    } timeD+= Math.round(allSongs[T].duration/60)+`:`;
-    if(Math.round(allSongs[T].duration%60)<10){
+    } timeD+= Math.floor(allSongs[T].duration/60)+`:`;
+    if(Math.floor(allSongs[T].duration%60)<10){
         timeD+=`0`;
-    }timeD+= Math.round(allSongs[T].duration%60);
+    }timeD+= Math.floor(allSongs[T].duration%60);
 
     let timeN = ``;
     if(Math.floor(getNum()/60)<10){
@@ -100,7 +100,7 @@ for(let i=0; i<BTNs.length; i++){
     });
     allSongs[i].addEventListener(`ended`, function(e){
         if(loopBTN.checked){
-            stopMusic(i);
+            playMusic(i);
         }else{
             BTN_imgs[i].src=`../assets/play.png`
             allSongs[i].currentTime = 0;
@@ -108,6 +108,8 @@ for(let i=0; i<BTNs.length; i++){
                 playMusic(i+1);
             }else if(infBTN.checked && !allSongs[i+1]){
                 playMusic(0);
+            }else{
+                stopMusik(i)
             }
         }
     });

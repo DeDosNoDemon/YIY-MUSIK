@@ -46,9 +46,9 @@ function setTime(){
     }timeD+= Math.round(allSongs[T].duration%60);
 
     let timeN = ``;
-    if(Math.round(getNum()/60)<10){
+    if(Math.floor(getNum()/60)<10){
         timeN+=`0`;
-    } timeN+= Math.round(getNum()/60)+`:`;
+    } timeN+= Math.floor(getNum()/60)+`:`;
     if(Math.round(getNum()%60)<10){
         timeN+=`0`;
     }timeN+= Math.round(getNum()%60);
